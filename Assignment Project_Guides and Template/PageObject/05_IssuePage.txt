@@ -1,0 +1,60 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+Documentation	Issue Test scenario. CRUD Operation: Create, Read, Update, Delete
+
+
+
+Pre Condition	User must be signed up. Open Browser
+Post Condition	Close All Browsers
+Tags	Issues
+
+#******************* Common Variables ********************
+
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+
+Issue_URL		https://gitlab.com/omaryhma/Testiprojekti/-/issues
+Maded_issue_URL	https://gitlab.com/omaryhma/Testiprojekti/-/issues
+
+Title 	TestTitle
+New_title	NewTitle
+
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# Positive Tests
+
+	Create issue
+		Navigate to issue page 	Issue_URL
+		Input Title		title
+		Create Issue
+		Issue should be created
+
+ 	Update name of issue
+		Navigate to issue page 	Maded_issue_URL
+		Choose issue
+		Select Edit
+		Input Title		New_title
+		Save changes
+		Title has been changed succesfully
+
+	Create second issue with previous updated name
+		Navigate to issue page 	Issue_URL
+		Select New issue
+		Input Title		New_title
+		Create Issue
+		Issue should be created with same title than before 
+
+    Delete first issue
+		Navigate to issue page 	Issue_URL
+		Select first maded issue
+		Select three points on right upper corner
+		Delete issue
+		Issue was succefully deleted

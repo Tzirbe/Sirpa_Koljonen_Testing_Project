@@ -1,0 +1,81 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+
+Documentation	Testing the sign up functionality. Sign up test with valid and ivalid credentials.
+
+Pre Condition	The user is not yet registered
+Post Condition	The registeration form has been filled out and submitted succesfully
+Tags   Sign up, registeration
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+
+LoginUrl = https://gitlab.com/users/sign_up
+Firstname =  Testname
+Lastname = Testlastname
+Username = Tysontesting
+Email = email@example.com
+Password = ********
+Same_username = Tysontesting
+Invalid_email = emailexample.com
+Empty=
+
+
+#******************** Test Cases ***
+**********************
+
+*** Test Case ***
+
+
+# Positive Tests
+
+	Register user with valid username and password 
+    	Navigate To Sign Up Page  LoginUrl
+    	Input First name  Firstname
+		Input Last name   Lastname
+		Input Username 	 Username
+		Input Email		 Email
+    	Input Password  Password
+    	Submit Registeration form
+    	The registeration should be valid
+
+# Negative Tests 
+
+	Register user with same above username,
+		Navigate To Sign Up Page  LoginUrl
+		Input Firstname		Firstname
+		Input Lastname		Lastname
+		Input Username 		Same_username
+		Input Email			Email
+		Input Password		Password
+		Submit Registeration form
+		Verify Page Should Contain Invalid username or message that username has already taken
+
+	Register user without password
+		Navigate To Sign Up Page  LoginUrl
+		Input Firstname		Firstname
+		Input Lastname		Lastname
+		Input Username 		Username
+		Input Email			Email
+		Input Password		Empty
+		Submit Registeration form
+		Verify Page Should inform password is missing and not let continue registeration
+
+	Register user with invalid email
+		Navigate To Sign Up Page  LoginUrl
+		Input Firstname		Firstname
+		Input Lastname		Lastname
+		Input Username 		Username
+		Input Email			Invalid_email
+		Input Password		Password
+		Submit Registeration form
+		Verify Page Should inform email is incorrect and not let continue registeration
+
+
+

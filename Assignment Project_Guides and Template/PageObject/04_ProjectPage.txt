@@ -1,0 +1,75 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+
+
+Documentation	Project test scenarios. CRUD Operation: Create, Read, Update, Delete
+
+Pre Condition	 User must be signed up, webpage is loaded
+Post Condition	Project has been succesfully created
+Tags			Project management
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+URL  https://gitlab.com/projects/new
+TemplateprojectURL	https://gitlab.com/projects/new#create_from_template
+
+Project_name		Testproject
+Same_name 			Testproject
+New_name			Newproject
+
+
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+
+# Positive Test examples are below write test process steps for each below test case
+
+	Create blank project
+		Navigate to create page  URL
+		Select Create blank project
+		Input Project name		Project_name
+		Submit Create Project
+		New blank project is created
+
+	Create template project 
+		Navigate to create page 	TemplateprojectURL
+		Select Use template
+		Input Project name		Project_name
+		Submit Create Project
+		New template project is created
+
+	Update name of template project
+		Navigate to create page  URL
+		Select projects
+		Select template project that is maded
+		Select three points on right corner
+		Select project settings
+		Project name	New_name
+		Save changes
+		The project name was succesfullu update
+
+
+	Delete template project
+
+
+	Valide that message is showing Project 'First project ' was successfully created.
+
+# Negative Test 
+
+	Create a blank project with the previous same name
+		Navigate to create page  URL
+		Select Create blank project
+		Input Project name		Same_name
+		Submit Create Project
+		Page should inform the name has already been taken
+
+
+
